@@ -5,6 +5,8 @@ FSJS project 2 - List Filter and Pagination
 //"use strict";   
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
+const studentItem = document.getElementsByClassName('student-item');
+const itemsOnPage = 10;
 
 const header = document.getElementsByClassName('page-header')[0];
 const divSearch = document.createElement('div');
@@ -22,68 +24,33 @@ divSearch.appendChild(inputSearch);
 divSearch.appendChild(button);
 
 
-
-
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
-
-const studentItem = document.getElementsByClassName('student-item');
-const itemsOnPage = 10;
-
-/*** 
-   Create the `showPage` function to hide all of the items in the 
-   list except for the ten you want to show.
-
-
-   Pro Tips: 
-     - Keep in mind that with a list of 54 students, the last page 
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when 
-       you initially define the function, and it acts as a variable 
-       or a placeholder to represent the actual function `argument` 
-       that will be passed into the parens later when you call or 
-       "invoke" the function 
-***/
-
-/**
-   
- */
-
-
  function searchFunc(searchInput, list) {
    
    const resultsArray = []
 
    for (let i=0; i < list.length; i++){
       const li = list[i];
+      li.style.display='none';
       const liH3= li.children[0].getElementsByTagName('h3');
       
-      
       if (searchInput.value.length !== 0 & searchInput.value !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
-         //li.style.display = 'block';
          resultsArray.push(li);
-         showPage(resultsArray,1);
-         appendPageLinks(resultsArray);
-         console.log(resultsArray, resultsArray.length);  
-      } else if (searchInput.value.length === 0){
-         showPage(studentItem, 1);
-         appendPageLinks(studentItem);
-      }
+      } else {
+         showPage(studentItem, 1); 
+      } 
    }  
 
-   //appendPageLinks(studentItem);
+   const paginationDiv = document.getElementsByClassName('pagination');
+   if (paginationDiv) {
+      console.log(paginationDiv);
+      appendPageLinks(resultsArray); 
+   }
+   showPage(resultsArray,1);
+   //appendPageLinks(resultsArray);
+   
  }
 
- showPage(studentItem, 1);
+
 
 function showPage(list, page) {
    
@@ -100,31 +67,18 @@ function showPage(list, page) {
    }
 }
 
-
-
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
 function appendPageLinks(list) {
    
-  
    const div = document.createElement('div');
    div.setAttribute('class', 'pagination');
-
    const ul = document.createElement('ul');
-   
    const pageLinks = Math.ceil(list.length / itemsOnPage); 
-   
    const pageDiv= document.getElementsByTagName('div')[0];
    
-  
    for (let i = 0; i < pageLinks; i++){
       const li = document.createElement('li');
       const pageNumber = document.createElement('a');
-      pageNumber.setAttribute('href', '#');
-      const pages = pageNumber.textContent = parseInt([i]) + 1;
+      const pages = pageNumber.textContent = parseInt([i]) + 1; 
       div.appendChild(ul);
       ul.appendChild(li);
       li.appendChild(pageNumber);
@@ -163,8 +117,8 @@ inputSearch.addEventListener('keyup', () =>{
    searchFunc(inputSearch,studentItem);
 });
 
-
-//appendPageLinks(studentItem);
+showPage(studentItem, 1); 
+appendPageLinks(studentItem);
 
 
 
