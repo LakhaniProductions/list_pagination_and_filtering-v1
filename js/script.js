@@ -40,13 +40,12 @@ divSearch.appendChild(button);
       } 
    }  
 
-   const paginationDiv = document.getElementsByClassName('pagination');
+   const paginationDiv = document.querySelector('.pagination');
    if (paginationDiv) {
-      console.log(paginationDiv);
-      appendPageLinks(resultsArray); 
+      paginationDiv.parentNode.removeChild(paginationDiv);
    }
    showPage(resultsArray,1);
-   //appendPageLinks(resultsArray);
+   appendPageLinks(resultsArray);
    
  }
 
