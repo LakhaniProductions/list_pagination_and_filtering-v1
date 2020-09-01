@@ -21,7 +21,7 @@ header.appendChild(divSearch);
 divSearch.appendChild(inputSearch);
 divSearch.appendChild(button);
 
-const resultsArray =[];
+
 
 
 /*** 
@@ -59,60 +59,28 @@ const itemsOnPage = 10;
  */
 
 
- function searchFunc(searchInput, list, arr) {
+ function searchFunc(searchInput, list) {
    
+   const resultsArray = []
+
    for (let i=0; i < list.length; i++){
       const li = list[i];
       const liH3= li.children[0].getElementsByTagName('h3');
       
-   
-      /* CONFIRMED WORKING 
-      if (searchInput.value.length !== 0 && searchInput.value.length !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
-         li.style.display = 'block'; 
-         arr.push(li); 
-         console.log(arr, arr.length);
-      } else if (searchInput.value.length !== 0){
-         li.style.display = 'none';
-      } else if (searchInput.value.length === 0 || searchInput.value === '') {
-         arr = [];
-         arr.length = 0;
-         console.log(arr, arr.length);
-         showPage(studentItem, 1, resultsArray);
-      } 
-      */
-     
-     if (searchInput.value.length !== 0 && searchInput.value.length !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
-         li.style.display = 'block'; 
-         arr.push(li); 
-         
-         console.log(arr, arr.length);
-
-         // if (liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) && searchInput.value.length > liH3[0].textContent..length){
-         //    console.log('j');
-         // }
-
-
-      } else if (searchInput.value.length !== 0){
-         li.style.display = 'none';
-      } else if (searchInput.value.length === 0 || searchInput.value === '') {
-         arr = [];
-         arr.length = 0;
-         //console.log(arr, arr.length);
-         showPage(studentItem, 1, resultsArray);
-      } 
       
-      
-
-
-      // if (liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) && liH3[0].textContent.length > searchInput.value.length ) {
-      //    //arr.filter(li =>  liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) !== 1)
-      //    //li.style.display = 'none';
-      //    console.log('hello');
-      // }
-
-      
-      
+      if (searchInput.value.length !== 0 & searchInput.value !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
+         //li.style.display = 'block';
+         resultsArray.push(li);
+         showPage(resultsArray,1);
+         appendPageLinks(resultsArray);
+         console.log(resultsArray, resultsArray.length);  
+      } else if (searchInput.value.length === 0){
+         showPage(studentItem, 1);
+         appendPageLinks(studentItem);
+      }
    }  
+
+   //appendPageLinks(studentItem);
  }
 
  showPage(studentItem, 1);
@@ -129,7 +97,6 @@ function showPage(list, page) {
      } else {
         li.style.display = 'none';
      }
-    
    }
 }
 
@@ -140,7 +107,7 @@ function showPage(list, page) {
    functionality to the pagination buttons.
 ***/
 
-function appendPageLinks(list, arr) {
+function appendPageLinks(list) {
    
   
    const div = document.createElement('div');
@@ -189,20 +156,70 @@ function appendPageLinks(list, arr) {
 button.addEventListener('click', (event) => {
    event.preventDefault();
 
-   searchFunc(inputSearch,studentItem,resultsArray);
+   searchFunc(inputSearch,studentItem);
 });
 
 inputSearch.addEventListener('keyup', () =>{
-   searchFunc(inputSearch,studentItem,resultsArray);
+   searchFunc(inputSearch,studentItem);
 });
 
 
+//appendPageLinks(studentItem);
 
 
 
-appendPageLinks(studentItem,resultsArray);
 
 
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CONFIRMED WORKING 
+      if (searchInput.value.length !== 0 && searchInput.value.length !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
+         li.style.display = 'block'; 
+         arr.push(li); 
+         console.log(arr, arr.length);
+      } else if (searchInput.value.length !== 0){
+         li.style.display = 'none';
+      } else if (searchInput.value.length === 0 || searchInput.value === '') {
+         arr = [];
+         arr.length = 0;
+         console.log(arr, arr.length);
+         showPage(studentItem, 1, resultsArray);
+      } 
+      */
+
+   //   if (searchInput.value.length !== 0 && searchInput.value !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
+   //       li.style.display = 'block'; 
+   //       const resultsArray =[];
+   //       resultsArray.push(li); 
+   //       console.log(resultsArray, resultsArray.length);
+
+   //    } else if (searchInput.value.length !== 0){
+   //       li.style.display = 'none';
+   //    } else if (searchInput.value.length === 0 || searchInput.value === '') {
+   //       arr = [];
+   //       arr.length = 0;
+   //       //console.log(arr, arr.length);
+   //       showPage(studentItem, 1);
+   //    } 
+      
+   
+      // if (liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) && liH3[0].textContent.length > searchInput.value.length ) {
+      //    //arr.filter(li =>  liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) !== 1)
+      //    //li.style.display = 'none';
+      //    console.log('hello');
+      // }
