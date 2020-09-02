@@ -39,7 +39,9 @@ divSearch.appendChild(button);
 /**
  * searchFunc creates a resultsArray which is initially empty 
  * Gets paginationDiv which contains the pagination links. If there is already a pagnationDiv it removes it
- * for loop then crea
+ * for loop then loops through all the li's and sets display to none. 
+ * liH3 gets the h3 of li elements and checks if searchInput contains characters from the h3
+ * if so, results are pushed into the resultsArray. If not, showPage function is called. 
  */
 
  function searchFunc(searchInput,list) {
@@ -69,6 +71,11 @@ divSearch.appendChild(button);
 
  }
 
+ /**
+  * showPage function creates a star and end Index
+  * loops through li elements of list and checks it's index against the counter variable
+  * if it's within the range it sets display to block. Out of range sets display to none. 
+  */
 function showPage(list, page) {
    
    const startIndex = (page * itemsOnPage) - itemsOnPage;
@@ -83,6 +90,13 @@ function showPage(list, page) {
      }
    }
 }
+
+/**
+ * appendPageLinks has a list parameter which passes either the studentItem list or resultArray as argument. 
+ * it gets the div called page which holds everything
+ * it creates a p element that displays the error when nothing matches the search
+ * the functionality of appendPageLink is based on the condition of length of either list. If the list isn't empty create pagination links else display error
+ */
 
 function appendPageLinks(list) {
    const pageDiv= document.getElementsByTagName('div')[0];
@@ -136,16 +150,25 @@ function appendPageLinks(list) {
    
 }
 
+/**
+ * Calls search funtion when button is clicked
+ */
 button.addEventListener('click', (event) => {
    event.preventDefault();
 
    searchFunc(inputSearch,studentItem);
 });
 
+/**
+ * Calls search funtion when a key is pressed in input field
+ */
 inputSearch.addEventListener('keyup', () =>{
    searchFunc(inputSearch,studentItem);
 });
 
+/**
+ * Calling our functions with required arguments. 
+ */
 showPage(studentItem, 1); 
 appendPageLinks(studentItem);
 
