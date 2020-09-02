@@ -52,7 +52,7 @@ divSearch.appendChild(button);
    
    const errorDiv= document.querySelector('.error');
    if (errorDiv) {
-      console.log(errorDiv.parentNode.removeChild(errorDiv));
+      errorDiv.parentNode.removeChild(errorDiv);
    }
    if (paginationDiv) {
       paginationDiv.parentNode.removeChild(paginationDiv);
