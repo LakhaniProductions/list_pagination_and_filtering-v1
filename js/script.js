@@ -36,6 +36,8 @@ header.appendChild(divSearch);
 divSearch.appendChild(inputSearch);
 divSearch.appendChild(button);
 
+
+
 /**
  * searchFunc creates a resultsArray which is initially empty 
  * Gets paginationDiv which contains the pagination links. If there is already a pagnationDiv it removes it
@@ -45,16 +47,20 @@ divSearch.appendChild(button);
  */
 
  function searchFunc(searchInput,list) {
-   
    const resultsArray = [];
    const paginationDiv = document.querySelector('.pagination');
    
+   const errorDiv= document.querySelector('.error');
+   if (errorDiv) {
+      console.log(errorDiv.parentNode.removeChild(errorDiv));
+   }
    if (paginationDiv) {
       paginationDiv.parentNode.removeChild(paginationDiv);
+
    } 
 
    for (let i=0; i < list.length; i++){
-      const li = list[i];console.log(li);
+      const li = list[i];
       li.style.display='none';
       const liH3= li.children[0].getElementsByTagName('h3');
       
@@ -64,8 +70,6 @@ divSearch.appendChild(button);
          showPage(studentItem, 1);   
       } 
    }  
-
-   
    showPage(resultsArray,1);
    appendPageLinks(resultsArray); 
 
@@ -100,15 +104,19 @@ function showPage(list, page) {
 
 function appendPageLinks(list) {
    const pageDiv= document.getElementsByTagName('div')[0];
+   const divError = document.createElement('div');
+   divError.setAttribute('class', 'error');
    const pError = document.createElement('p');
-   pageDiv.appendChild(pError);
+   pError.setAttribute('id', 'error');
+   pageDiv.appendChild(divError);
+   divError.appendChild(pError);
    
    if (list.length !== 0 ) {
       const div = document.createElement('div');
       div.setAttribute('class', 'pagination');
       const ul = document.createElement('ul');
       const pageLinks = Math.ceil(list.length / itemsOnPage); 
-      
+      divError.parentNode.removeChild(divError);
       
       for (let i = 0; i < pageLinks; i++){
          const li = document.createElement('li');
@@ -141,11 +149,10 @@ function appendPageLinks(list) {
             showPage(list, pageSelectorAll[i].textContent);
          })
       }  
-   } else if (list.length === 0 ){
-      
+   } else if (list.length === 0){
       pError.textContent= 'No results match your query. Please try again.';
-      pError.style.display='block';
-      
+      pError.style.display='block'; 
+      console.log
    } 
    
 }
@@ -155,7 +162,6 @@ function appendPageLinks(list) {
  */
 button.addEventListener('click', (event) => {
    event.preventDefault();
-
    searchFunc(inputSearch,studentItem);
 });
 
