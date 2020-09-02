@@ -35,21 +35,20 @@ divSearch.appendChild(button);
       
       if (searchInput.value.length !== 0 & searchInput.value !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
          resultsArray.push(li);
-      } else {
-         showPage(studentItem, 1); 
+      } else if (searchInput.value.length === 0 && searchInput.value === '') {
+         showPage(studentItem, 1);   
       } 
    }  
 
    const paginationDiv = document.querySelector('.pagination');
+   
    if (paginationDiv) {
       paginationDiv.parentNode.removeChild(paginationDiv);
-   }
+   } 
    showPage(resultsArray,1);
-   appendPageLinks(resultsArray);
-   
+   appendPageLinks(resultsArray); 
+
  }
-
-
 
 function showPage(list, page) {
    
@@ -101,7 +100,7 @@ function appendPageLinks(list) {
                pageSelectorAll[i].setAttribute('class', '');
             }
          }
-         showPage(studentItem, pageSelectorAll[i].textContent);
+         showPage(list, pageSelectorAll[i].textContent);
       })
    }  
 }
@@ -118,61 +117,3 @@ inputSearch.addEventListener('keyup', () =>{
 
 showPage(studentItem, 1); 
 appendPageLinks(studentItem);
-
-
-
-
-
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CONFIRMED WORKING 
-      if (searchInput.value.length !== 0 && searchInput.value.length !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
-         li.style.display = 'block'; 
-         arr.push(li); 
-         console.log(arr, arr.length);
-      } else if (searchInput.value.length !== 0){
-         li.style.display = 'none';
-      } else if (searchInput.value.length === 0 || searchInput.value === '') {
-         arr = [];
-         arr.length = 0;
-         console.log(arr, arr.length);
-         showPage(studentItem, 1, resultsArray);
-      } 
-      */
-
-   //   if (searchInput.value.length !== 0 && searchInput.value !== '' && liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
-   //       li.style.display = 'block'; 
-   //       const resultsArray =[];
-   //       resultsArray.push(li); 
-   //       console.log(resultsArray, resultsArray.length);
-
-   //    } else if (searchInput.value.length !== 0){
-   //       li.style.display = 'none';
-   //    } else if (searchInput.value.length === 0 || searchInput.value === '') {
-   //       arr = [];
-   //       arr.length = 0;
-   //       //console.log(arr, arr.length);
-   //       showPage(studentItem, 1);
-   //    } 
-      
-   
-      // if (liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) && liH3[0].textContent.length > searchInput.value.length ) {
-      //    //arr.filter(li =>  liH3[0].textContent.toLowerCase().includes(searchInput.value.toLowerCase()) !== 1)
-      //    //li.style.display = 'none';
-      //    console.log('hello');
-      // }
